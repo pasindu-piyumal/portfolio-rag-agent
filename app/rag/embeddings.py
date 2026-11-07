@@ -1,33 +1,26 @@
+
 import os
 from dotenv import load_dotenv
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 load_dotenv()
 
 
 def get_embedding_model():
     """
-    Initialize and return the local Hugging Face embedding model.
+    Initialize Gemini embeddings through Google's API.
+    Embeddings are generated remotely instead of loading
+    a local Hugging Face model.
     """
 
     model_name = os.getenv(
-        "HF_EMBEDDING_MODEL",
-        "sentence-transformers/all-MiniLM-L6-v2"
+        "GEMINI_EMBEDDING_MODEL",
+        "gemini-embedding-001"
     )
 
-    device = os.getenv(
-        "HF_EMBEDDING_DEVICE",
-        "cpu"
-    )
-
-    embedding_model = HuggingFaceEmbeddings(
-        model_name=model_name,
-        model_kwargs={
-            "device": device
-        },
-        encode_kwargs={
-            "normalize_embeddings": True
-        }
+    embedding_model = GoogleGenerativeAIEmbeddings(
+        model=model_name,
+        output_dimensionality=768
     )
 
     return embedding_model
