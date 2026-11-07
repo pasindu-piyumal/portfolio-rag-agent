@@ -12,9 +12,9 @@ app = FastAPI(
 # CORS configuration
 origins = [
     "http://localhost:5173",
-    "http://127.0.0.1:5173"
+    "http://127.0.0.1:5173",
+    "https://pasindu-piyumal.github.io"
 ]
-
 
 app.add_middleware(
     CORSMiddleware,
