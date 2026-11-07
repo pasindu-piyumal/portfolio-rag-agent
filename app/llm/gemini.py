@@ -1,27 +1,25 @@
+
 import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-# Load environment variables
 load_dotenv()
 
 
 def get_gemini_model():
-    """
-    Initialize and return the Gemini chat model.
-    """
+    """Initialize and return the Gemini chat model."""
 
     api_key = os.getenv("GOOGLE_API_KEY")
 
     if not api_key:
         raise ValueError(
             "GOOGLE_API_KEY is missing. "
-            "Please check your .env file."
+            "Please check your environment variables."
         )
 
     model_name = os.getenv(
         "GEMINI_MODEL",
-        "gemini-2.5-flash"
+        "gemini-3.8-flash"
     )
 
     model = ChatGoogleGenerativeAI(
